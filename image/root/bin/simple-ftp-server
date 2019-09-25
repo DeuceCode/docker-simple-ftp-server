@@ -12,7 +12,7 @@ def main():
     # Instantiate a dummy authorizer for managing 'virtual' users
     authorizer = DummyAuthorizer()
     LOGLEVEL = environ.get('LOGLEVEL', 'WARNING').upper()
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=LOGLEVEL)
 
     # Define a new user having full r/w permissions and a read-only
     # anonymous user
