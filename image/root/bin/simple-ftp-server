@@ -6,10 +6,13 @@ from pyftpdlib.authorizers import DummyAuthorizer
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
 
+import logging
 
 def main():
     # Instantiate a dummy authorizer for managing 'virtual' users
     authorizer = DummyAuthorizer()
+    LOGLEVEL = environ.get('LOGLEVEL', 'WARNING').upper()
+    logging.basicConfig(level=logging.DEBUG)
 
     # Define a new user having full r/w permissions and a read-only
     # anonymous user
