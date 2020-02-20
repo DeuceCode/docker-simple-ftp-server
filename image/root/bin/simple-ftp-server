@@ -37,7 +37,7 @@ def main():
     server = FTPServer(address, handler)
 
     # set a limit for connections
-    server.max_cons = 256
+    server.max_cons = int(environ.get('FTP_MAX_CONNECTIONS', '256'))
     server.max_cons_per_ip = int(environ.get('FTP_MAX_CONS_PER_IP', '50'))
 
     # start ftp server
