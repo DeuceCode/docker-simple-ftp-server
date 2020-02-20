@@ -1,7 +1,7 @@
 ## -*- docker-image-name: "mauler/simple-ftp-server" -*-
 
 FROM python:slim
-MAINTAINER Paulo <proberto.macedo@gmail.com>
+MAINTAINER EURANOVA <info@euranova.eu>
 
 ENV FTP_ROOT /ftp-home
 ENV FTP_USER ftp

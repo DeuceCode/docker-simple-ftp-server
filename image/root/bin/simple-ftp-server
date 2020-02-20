@@ -6,10 +6,13 @@ from pyftpdlib.authorizers import DummyAuthorizer
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
 
+import logging
 
 def main():
     # Instantiate a dummy authorizer for managing 'virtual' users
     authorizer = DummyAuthorizer()
+    LOGLEVEL = environ.get('LOGLEVEL', 'WARNING').upper()
+    logging.basicConfig(level=LOGLEVEL)
 
     # Define a new user having full r/w permissions and a read-only
     # anonymous user
@@ -26,7 +29,7 @@ def main():
 
     # Specify a masquerade address and the range of ports to use for
     # passive connections.  Decomment in case you're behind a NAT.
-    # handler.masquerade_address = '151.25.42.11'
+    # handler.masquerade_address = environ.get('FTP_MASQUERADE_ADDRESS', None)
     # handler.passive_ports = range(60000, 65535)
 
     # Instantiate FTP server class and listen on 0.0.0.0:2121
@@ -35,7 +38,7 @@ def main():
 
     # set a limit for connections
     server.max_cons = 256
-    server.max_cons_per_ip = 5
+    server.max_cons_per_ip = int(environ.get('FTP_MAX_CONS_PER_IP', '50'))
 
     # start ftp server
     server.serve_forever()
